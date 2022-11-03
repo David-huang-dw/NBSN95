@@ -83,7 +83,7 @@ static uint8_t error_num = 0;				    //Error count
 static uint8_t uplink_time_num = 0;
 
 extern uint8_t dns_id_flags;
-extern uint8_t 	bc35tobc95_flags;   //Switch module flag
+extern uint8_t 	bc35tobc95_flags;
 static uint8_t dns_reset_num;
 /* USER CODE END PV */
 

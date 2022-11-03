@@ -256,10 +256,6 @@ NB_TaskStatus nb_TCP_uri_run(const char* param)
 	{
 		NBTask[_AT_TCP_URI].nb_cmd_status = NB_SEND_SUCC;	
 	}
-	else if(strstr((char*)nb.usart.data,"NSOCO") != NULL)
-	{
-		NBTask[_AT_TCP_URI].nb_cmd_status = NB_NSOCO_SUCC;		
-	}
 	else
 		NBTask[_AT_TCP_URI].nb_cmd_status = NB_OTHER;
 //Judgment issued and received 

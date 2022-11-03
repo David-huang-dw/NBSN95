@@ -3,7 +3,7 @@
 <title>Static Call Graph - [NBSN95\NBSN95.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image NBSN95\NBSN95.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sat Oct 29 10:19:48 2022
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Thu Oct 13 10:27:53 2022
 <BR><P>
 <H3>Maximum Stack Usage =        320 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -416,7 +416,6 @@ Global Symbols
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;at_pword_set
 <LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;at_pwd_set
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;at_pubtopic_set
-<LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;at_dnscfg_set
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;at_deui_set
 <LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;at_client_set
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;at_apn_set
@@ -479,7 +478,6 @@ Global Symbols
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;at_pword_set
 <LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;at_pwd_set
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;at_pubtopic_set
-<LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;at_dnscfg_set
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;at_deui_set
 <LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;at_client_set
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;at_apn_set
@@ -1136,7 +1134,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[74]"></a>EXTI4_15_IRQHandler</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, stm32l0xx_it.o(i.EXTI4_15_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = EXTI4_15_IRQHandler &rArr; HAL_GPIO_EXTI_IRQHandler &rArr; HAL_GPIO_EXTI_Callback
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = EXTI4_15_IRQHandler &rArr; HAL_GPIO_EXTI_IRQHandler &rArr; HAL_GPIO_EXTI_Callback &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_EXTI_IRQHandler
 </UL>
@@ -1455,16 +1453,18 @@ Global Symbols
 <LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_erase
 </UL>
 
-<P><STRONG><a name="[135]"></a>HAL_GPIO_EXTI_Callback</STRONG> (Thumb, 76 bytes, Stack size 8 bytes, main.o(i.HAL_GPIO_EXTI_Callback))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = HAL_GPIO_EXTI_Callback
+<P><STRONG><a name="[135]"></a>HAL_GPIO_EXTI_Callback</STRONG> (Thumb, 90 bytes, Stack size 8 bytes, main.o(i.HAL_GPIO_EXTI_Callback))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = HAL_GPIO_EXTI_Callback &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[136]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LPM_DisableStopMode
+<LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
+<LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_EXTI_IRQHandler
 </UL>
 
 <P><STRONG><a name="[114]"></a>HAL_GPIO_EXTI_IRQHandler</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, stm32l0xx_hal_gpio.o(i.HAL_GPIO_EXTI_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = HAL_GPIO_EXTI_IRQHandler &rArr; HAL_GPIO_EXTI_Callback
+<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = HAL_GPIO_EXTI_IRQHandler &rArr; HAL_GPIO_EXTI_Callback &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[135]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_EXTI_Callback
 </UL>
@@ -1499,8 +1499,10 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[112]"></a>HAL_GPIO_WritePin</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32l0xx_hal_gpio.o(i.HAL_GPIO_WritePin))
-<BR><BR>[Called By]<UL><LI><a href="#[195]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;led_on
+<BR><BR>[Called By]<UL><LI><a href="#[1d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart1_Init
+<LI><a href="#[195]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;led_on
 <LI><a href="#[189]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
+<LI><a href="#[1a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ULT_getData
 <LI><a href="#[1a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ULT_distance
 <LI><a href="#[197]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;txPayLoadDeal
 <LI><a href="#[1ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;txPayLoadDeal2
@@ -1529,6 +1531,7 @@ Global Symbols
 <LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
 <LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATInsPro
 <LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[135]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_EXTI_Callback
 <LI><a href="#[1a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USERTASK
 <LI><a href="#[154]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RTC_DeactivateAlarm
 <LI><a href="#[1d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sht31Data
@@ -1960,7 +1963,7 @@ Global Symbols
 <LI><a href="#[18d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_LPUART1_UART_Init
 </UL>
 
-<P><STRONG><a name="[16b]"></a>HAL_UART_MspInit</STRONG> (Thumb, 274 bytes, Stack size 48 bytes, usart.o(i.HAL_UART_MspInit))
+<P><STRONG><a name="[16b]"></a>HAL_UART_MspInit</STRONG> (Thumb, 272 bytes, Stack size 48 bytes, usart.o(i.HAL_UART_MspInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = HAL_UART_MspInit &rArr; HAL_DMA_Init &rArr; __aeabi_uidivmod
 </UL>
 <BR>[Calls]<UL><LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Init
@@ -2226,7 +2229,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[193]"></a>NBTASK</STRONG> (Thumb, 4328 bytes, Stack size 88 bytes, nbinit.o(i.NBTASK))
+<P><STRONG><a name="[193]"></a>NBTASK</STRONG> (Thumb, 4322 bytes, Stack size 88 bytes, nbinit.o(i.NBTASK))
 <BR><BR>[Stack]<UL><LI>Max Depth = 320<LI>Call Chain = NBTASK &rArr; txPayLoadDeal &rArr; LidarLite &rArr; waitbusy &rArr; HAL_I2C_Mem_Read &rArr; I2C_RequestMemoryRead &rArr; I2C_WaitOnTXISFlagUntilTimeout &rArr; I2C_IsAcknowledgeFailed
 </UL>
 <BR>[Calls]<UL><LI><a href="#[195]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;led_on
@@ -2406,10 +2409,11 @@ Global Symbols
 <LI><a href="#[1ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;txPayLoadDeal2
 </UL>
 
-<P><STRONG><a name="[1a7]"></a>ULT_getData</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, ult.o(i.ULT_getData))
-<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = ULT_getData &rArr; HAL_Delay
+<P><STRONG><a name="[1a7]"></a>ULT_getData</STRONG> (Thumb, 62 bytes, Stack size 16 bytes, ult.o(i.ULT_getData))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = ULT_getData &rArr; HAL_Delay
 </UL>
-<BR>[Calls]<UL><LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
+<BR>[Calls]<UL><LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
+<LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
 </UL>
 <BR>[Called By]<UL><LI><a href="#[197]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;txPayLoadDeal
 <LI><a href="#[1ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;txPayLoadDeal2
@@ -2468,6 +2472,7 @@ Global Symbols
 <LI><a href="#[193]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NBTASK
 <LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATInsPro
 <LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[135]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_EXTI_Callback
 <LI><a href="#[1a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USERTASK
 <LI><a href="#[1d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sht31Data
 <LI><a href="#[1d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sht20Data
@@ -2696,14 +2701,12 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> at.o(.constdata)
 </UL>
-<P><STRONG><a name="[cd]"></a>at_dnscfg_set</STRONG> (Thumb, 86 bytes, Stack size 16 bytes, at.o(i.at_dnscfg_set))
+<P><STRONG><a name="[cd]"></a>at_dnscfg_set</STRONG> (Thumb, 60 bytes, Stack size 16 bytes, at.o(i.at_dnscfg_set))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = at_dnscfg_set &rArr; countchar
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;countchar
 <LI><a href="#[1a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 <LI><a href="#[1b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strchr
-<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
-<LI><a href="#[194]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> at.o(.constdata)
 </UL>
@@ -3028,7 +3031,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> at.o(.constdata)
 </UL>
-<P><STRONG><a name="[1bb]"></a>config_Get</STRONG> (Thumb, 1156 bytes, Stack size 24 bytes, at.o(i.config_Get))
+<P><STRONG><a name="[1bb]"></a>config_Get</STRONG> (Thumb, 1148 bytes, Stack size 24 bytes, at.o(i.config_Get))
 <BR><BR>[Stack]<UL><LI>Max Depth = 100<LI>Call Chain = config_Get &rArr; EX_GPIO_Init &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
@@ -3926,7 +3929,7 @@ Global Symbols
 <LI> nb_coap.o(.data)
 <LI> nb_tcp.o(.data)
 </UL>
-<P><STRONG><a name="[65]"></a>nb_TCP_uri_run</STRONG> (Thumb, 128 bytes, Stack size 16 bytes, nb_tcp.o(i.nb_TCP_uri_run))
+<P><STRONG><a name="[65]"></a>nb_TCP_uri_run</STRONG> (Thumb, 112 bytes, Stack size 16 bytes, nb_tcp.o(i.nb_TCP_uri_run))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = nb_TCP_uri_run &rArr; nb_TCP_read_run &rArr; rxPayLoadDeal &rArr; config_Set &rArr; FLASH_program &rArr; HAL_FLASH_Program &rArr; FLASH_WaitForLastOperation &rArr; FLASH_SetErrorCode
 </UL>
 <BR>[Calls]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nb_TCP_read_run
@@ -4767,10 +4770,11 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;at_getsensorvalue_set
 </UL>
 
-<P><STRONG><a name="[1d4]"></a>uart1_Init</STRONG> (Thumb, 62 bytes, Stack size 32 bytes, usart.o(i.uart1_Init))
-<BR><BR>[Stack]<UL><LI>Max Depth = 60<LI>Call Chain = uart1_Init &rArr; HAL_GPIO_Init
+<P><STRONG><a name="[1d4]"></a>uart1_Init</STRONG> (Thumb, 90 bytes, Stack size 48 bytes, usart.o(i.uart1_Init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = uart1_Init &rArr; HAL_GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[10b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
+<BR>[Calls]<UL><LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
+<LI><a href="#[10b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
 <LI><a href="#[f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[197]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;txPayLoadDeal

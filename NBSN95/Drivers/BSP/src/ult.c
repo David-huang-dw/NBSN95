@@ -37,6 +37,13 @@ uint8_t ULT_Connection_Test(UART_HandleTypeDef *UartHandle,void (*GPIO_OUT_Set)(
 
 void ULT_getData()
 {
+	for(uint8_t i=0;i<4;i++)
+{
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_9,GPIO_PIN_RESET);
+	HAL_Delay(10);	
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_9,GPIO_PIN_SET);
+	HAL_Delay(70);	
+}
 	HAL_Delay(2000);
 }
 

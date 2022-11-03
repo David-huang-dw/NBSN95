@@ -1251,10 +1251,6 @@ case _AT_TCP_URI:
 				*task = _AT_QDNS;
 			  user_main_printf("Failed to send, resolve the domain name");
 			}
-			else if(uri_state == NB_NSOCO_SUCC)
-			{
-				*task = _AT_TCP_SEND;
-			}
 			else
 			{
 				at_state = _AT_ERROR;

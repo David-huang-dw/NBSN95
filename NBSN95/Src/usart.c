@@ -78,7 +78,7 @@ void MX_USART1_UART_Init(void)
   huart1.Init.WordLength = UART_WORDLENGTH_8B;
   huart1.Init.StopBits = UART_STOPBITS_1;
   huart1.Init.Parity = UART_PARITY_NONE;
-  huart1.Init.Mode = UART_MODE_TX_RX;
+  huart1.Init.Mode = UART_MODE_RX;
   huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
   huart1.Init.OverSampling = UART_OVERSAMPLING_16;
   huart1.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
@@ -188,7 +188,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     PA9     ------> USART1_TX
     PA10     ------> USART1_RX
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_9|GPIO_PIN_10;
+    GPIO_InitStruct.Pin = GPIO_PIN_10;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
@@ -269,7 +269,7 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
     PA9     ------> USART1_TX
     PA10     ------> USART1_RX
     */
-    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_9|GPIO_PIN_10);
+    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_10);
 
     /* USART1 interrupt Deinit */
     HAL_NVIC_DisableIRQ(USART1_IRQn);
@@ -305,12 +305,22 @@ void uart1_Init(void)
 	GPIO_InitTypeDef  GPIO_InitStruct={0};
 	__HAL_RCC_GPIOA_CLK_ENABLE();
 	 
-	GPIO_InitStruct.Pin = GPIO_PIN_9|GPIO_PIN_10;
+	GPIO_InitStruct.Pin = GPIO_PIN_10;
 	GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
 	GPIO_InitStruct.Pull = GPIO_PULLUP;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
 	GPIO_InitStruct.Alternate = GPIO_AF4_USART1;
+
 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+	
+		GPIO_InitStruct.Pin = GPIO_PIN_9;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+	
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_9,GPIO_PIN_SET);
+
 }
 
 void uart1_IoDeInit(void)
