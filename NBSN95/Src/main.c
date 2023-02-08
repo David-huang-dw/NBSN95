@@ -81,7 +81,7 @@ static uint8_t task_num = _AT_IDLE;			//NB task directory
 static uint8_t error_num = 0;				    //Error count
 
 static uint8_t uplink_time_num = 0;
-extern uint8_t 	restart_time_flags;
+
 extern uint8_t dns_id_flags;
 extern uint8_t 	bc35tobc95_flags;   //Switch module flag
 static uint8_t dns_reset_num;
@@ -349,13 +349,7 @@ static void USERTASK(void)
 		HAL_Delay(1500);
 		if(NBTask[_AT_QDNS].get(NULL) == NB_CMD_SUCC)
 		{
-			if(restart_time_flags==0)
-			 task_num = _AT_UPLOAD_START;
-		  else if(restart_time_flags==1)
-				{
-				 task_num = _AT_CCLK;		
-			  	restart_time_flags=0;
-				}
+			task_num = _AT_UPLOAD_START;
 			dns_reset_num=0;
 			break;
 		}
@@ -432,6 +426,7 @@ void HAL_RTCEx_AlarmBEventCallback(RTC_HandleTypeDef *hrtc)
 	if(nb.net_flag == fail)
 	{
 		task_num = _AT_CSQ;
+		nb.uplink_flag = send;
 	}
 	if(nb.net_flag == success && nb.uplink_flag == send)
 	{

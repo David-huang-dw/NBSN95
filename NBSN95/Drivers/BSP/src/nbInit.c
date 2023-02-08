@@ -6,7 +6,6 @@ static uint8_t	recieve_data[NB_RX_SIZE] = {0};	   	 			//Receive data
 static uint8_t 	set_band_flag=0;
 uint8_t 	dns_id_flags=0;
 uint8_t 	bc35tobc95_flags=0;
-uint8_t 	restart_time_flags=0;
 extern uint8_t downlink_twice_flags;
 	
 NB nb = {.net_flag=no_status,.recieve_flag=0,.usart.len=0,.usart.data=recieve_data,
@@ -762,14 +761,7 @@ case _AT_QDNS:{
 				else  
 				{
 					dns_id_flags=0;
-					
-					if(restart_time_flags==0)
 					*task = _AT_UPLOAD_START;
-					else if(restart_time_flags==1)
-					{
-					*task = _AT_CCLK;		
-					restart_time_flags=0;
-					}
 					user_main_printf("No DNS resolution required");
 				}
 			}
@@ -1305,8 +1297,7 @@ case _AT_NRB:{
 				nb.net_flag = no_status;
 				net_acc_status_led = 0;
 				nb.uplink_flag = no_status;
-				set_band_flag = 0;		
-        restart_time_flags = 1;				
+				set_band_flag = 0;				
 				My_AlarmInit(sys.tdc,0);
 
 				break;

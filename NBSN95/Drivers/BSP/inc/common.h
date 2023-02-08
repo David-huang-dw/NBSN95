@@ -41,7 +41,7 @@
  * @retval None
  */
 
-#define AT_VERSION_STRING 	"v1.3.0"
+#define AT_VERSION_STRING 	"v1.2.9"
 #define stack 							"D-BC95-003"
 
 #define COAP_PRO  0x01

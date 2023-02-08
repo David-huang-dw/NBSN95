@@ -1,7 +1,4 @@
 NBSN95
-v1.3.0
-1.修改存储数据缺少时间戳的BUG
-2.模块重启后增加第一个包获取时间戳功能
 v1.2.7
 1.Compatible with LDDS45 distance sensor
 

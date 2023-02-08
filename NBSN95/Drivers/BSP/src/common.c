@@ -326,7 +326,7 @@ void txPayLoadDeal(SENSOR* Sensor,LinkedList L)
 	
 	sprintf(Sensor->data+strlen(Sensor->data), "%.8x", sensor.time_stamp);
 //	sprintf(Sensor->data+strlen(Sensor->data), "%.4x", sys.uplink_count);   //count packet
-	memcpy(sensor_raw_data,&Sensor->data[16],strlen(Sensor->data)-16);
+	memcpy(sensor_raw_data,&Sensor->data[12],strlen(Sensor->data)-12);
 
 	if(sys.list_flag ==1 && sys.cum_flag == '1')	
 	{
