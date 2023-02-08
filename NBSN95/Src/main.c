@@ -81,9 +81,9 @@ static uint8_t task_num = _AT_IDLE;			//NB task directory
 static uint8_t error_num = 0;				    //Error count
 
 static uint8_t uplink_time_num = 0;
-
+extern uint8_t 	restart_time_flags;
 extern uint8_t dns_id_flags;
-extern uint8_t 	bc35tobc95_flags;
+extern uint8_t 	bc35tobc95_flags;   //Switch module flag
 static uint8_t dns_reset_num;
 /* USER CODE END PV */
 
@@ -198,9 +198,10 @@ int main(void)
 			task_num = _AT_URI;
 			nb.recieve_flag = NB_IDIE;
 		}
-		if(getsensorvalue_flag == 1)
+		if(getsensorvalue_flag == 1 && nb.uplink_flag == no_status)
 		{
 			task_num = _AT_CSQ;
+			nb.uplink_flag = send;
 			NBTASK(&task_num);
 			getsensorvalue_flag = 0;
 		}
@@ -348,7 +349,13 @@ static void USERTASK(void)
 		HAL_Delay(1500);
 		if(NBTask[_AT_QDNS].get(NULL) == NB_CMD_SUCC)
 		{
-			task_num = _AT_UPLOAD_START;
+			if(restart_time_flags==0)
+			 task_num = _AT_UPLOAD_START;
+		  else if(restart_time_flags==1)
+				{
+				 task_num = _AT_CCLK;		
+			  	restart_time_flags=0;
+				}
 			dns_reset_num=0;
 			break;
 		}
@@ -398,7 +405,10 @@ void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc)
 	if(nb.net_flag == no_status)
 		task_num = _AT_FLAG_INIT;
 	else if(nb.net_flag == success && nb.uplink_flag == no_status)
+	{
 		task_num = _AT_CSQ;
+		nb.uplink_flag = send;
+	}
 	
 	LPM_DisableStopMode();
 }
@@ -420,7 +430,9 @@ void HAL_RTCEx_AlarmBEventCallback(RTC_HandleTypeDef *hrtc)
 #endif	
 
 	if(nb.net_flag == fail)
+	{
 		task_num = _AT_CSQ;
+	}
 	if(nb.net_flag == success && nb.uplink_flag == send)
 	{
 		uplink_time_num++;
@@ -467,11 +479,15 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 			sensor.exit_count++;
 		else if(nb.net_flag == success && sys.mod != model6 && (task_num < _AT_COAP_CONFIG || task_num > _AT_TCP_CLOSE))
 		{
+			if(nb.uplink_flag == no_status)
+			{
 			task_num = _AT_CSQ;
+		  nb.uplink_flag = send;
 			sys.exit_flag = 1;
 			//sensor.exit_state = HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_14)==1?1:2;
 			sensor.exit_state = 1;
 			LPM_DisableStopMode();	
+			}
 		}
 	}
 	else if(GPIO_Pin == GPIO_PIN_13)

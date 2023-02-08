@@ -234,6 +234,15 @@ void txPayLoadDeal(SENSOR* Sensor,LinkedList L)
 		ULT_getData();
 		uart1_IoDeInit();
 		Sensor->distance = ULT_Data_processing();	
+			if(sensor.distance == 0)
+			{
+				 MAXSONAR_Rest();
+			   MX_USART1_UART_Init	();	
+         uart1_Init();	
+         MAXSONAR_getData();
+		     uart1_IoDeInit();		
+		     Sensor->distance = MAXSONAR_Data_processing();					
+			}
 		}
 		}
 		
@@ -317,7 +326,7 @@ void txPayLoadDeal(SENSOR* Sensor,LinkedList L)
 	
 	sprintf(Sensor->data+strlen(Sensor->data), "%.8x", sensor.time_stamp);
 //	sprintf(Sensor->data+strlen(Sensor->data), "%.4x", sys.uplink_count);   //count packet
-	memcpy(sensor_raw_data,&Sensor->data[12],strlen(Sensor->data)-12);
+	memcpy(sensor_raw_data,&Sensor->data[16],strlen(Sensor->data)-16);
 
 	if(sys.list_flag ==1 && sys.cum_flag == '1')	
 	{

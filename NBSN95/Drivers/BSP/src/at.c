@@ -681,7 +681,9 @@ ATEerror_t at_dnscfg_set(const char *param)
 	{
 		return AT_PARAM_ERROR;
 	}
-	
+
+	memset(user.dns_add,0,sizeof(user.dns_add));
+	memcpy(user.dns_add,(param+(pos-param)+1),strlen((param+(pos-param)+1)));		
 	return AT_OK;
 }
 /************** 			AT+APN		**************/
@@ -851,10 +853,24 @@ void config_Get(void)
 		sensor.GapValue = 400.0;
 	
 	sensor.exit_count = FLASH_read(add+24);
-	
+
 	sys.nband_flag = FLASH_read(add+80)>>24 &0xFF;
 	if(sys.nband_flag!='0' && sys.nband_flag!='1')
 		sys.nband_flag = '1';
+	
+	add = add+28;
+	for(uint8_t i=0,j=0;i<4;i++,j=j+4)
+	{
+		uint32_t temp  = FLASH_read(add+i*4);
+		user.deui[j] 	 = (temp>>24) & 0x000000FF;
+		user.deui[j+1] = (temp>>16) & 0x000000FF;
+		user.deui[j+2] = (temp>>8)  & 0x000000FF;
+		user.deui[j+3] = (temp)     & 0x000000FF;
+	}
+	if(strlen((char*)user.deui) == 0)
+	{
+		sprintf((char*)user.deui, "%s", "NULL");
+	}
 
 	add = FLASH_USER_START_ADDR_CONFIG + 0x04*11;
 	for(uint8_t i=0,j=0;i<5;i++,j=j+4)
@@ -884,19 +900,6 @@ void config_Get(void)
 		sprintf((char*)user.dns_add, "%s", "8.8.8.8,8.8.4.4");
 	}
 	
-	add = add+28;
-	for(uint8_t i=0,j=0;i<3;i++,j=j+4)
-	{
-		uint32_t temp  = FLASH_read(add+i*4);
-		user.deui[j] 	 = (temp>>24) & 0x000000FF;
-		user.deui[j+1] = (temp>>16) & 0x000000FF;
-		user.deui[j+2] = (temp>>8)  & 0x000000FF;
-		user.deui[j+3] = (temp)     & 0x000000FF;
-	}
-	if(strlen((char*)user.deui) == 0)
-	{
-		sprintf((char*)user.deui, "%s", "NULL");
-	}
 	
 	add = FLASH_USER_START_SERVER_ADD;
 	for(uint8_t i=0,j=0;i<18;i++,j=j+4)

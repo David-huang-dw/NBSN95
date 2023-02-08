@@ -163,6 +163,7 @@ typedef struct
 	uint8_t  	recieve_flag;				 				 //Serial reception completion flag
 	uint8_t		recieve_ack_flag;
 	uint8_t   resend_count;
+	char     recieve_data[512];	   			 	 //Receive data
 	uint8_t		imsi[20];						 				 //IMSI number
 	uint8_t		imei[20];						 				 //IMEI number
 	USART			usart;
@@ -184,6 +185,7 @@ typedef enum   //BC95-G Status flag
 	NB_CONN_SUCC,
 	NB_CONN_FAIL,
 	NB_SEND_SUCC,
+  NB_NSOCO_SUCC,
 	NB_SEND_FAIL,
 	NB_SUB_SUCC,
 	NB_SUB_FAIL,
@@ -524,7 +526,7 @@ static struct NBTASK NBTask[] =
 		.ATRecStrError  = "ERROR",
 		.cmd_num        = _AT_CSQ,
 		.len_string 		= sizeof(AT CSQ NEWLINE) - 1,
-		.time_out 			= 400,
+		.time_out 			= 500,
 		.try_num        = 4,
     .run 						= nb_null_run,
 		.set						= nb_null_run,
